@@ -1,10 +1,9 @@
 #include "HashMap.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+
 
 #define SEARCH(map, key) (map->entries[hash(GetHashSize(map), key)])
-
 LinkedList *NewLinked(void *value, LinkedList *next)
 {
     LinkedList *new_Linked = malloc(sizeof(LinkedList));
@@ -63,7 +62,7 @@ int hash(size_t hash_size, char *key)
     int result = 0;
     size_t string_size = strlen(key);
 
-    for (int i = 0; i < string_size; i++)
+    for (i = 0; i < string_size; i++)
     {
         result += key[i];
 
@@ -86,7 +85,7 @@ _HashMap *InitHashMap(size_t size)
 
     new_Map->entries = malloc(size * sizeof(Dict *));
 
-    for (int i = 0; i < size; i++)
+    for (i = 0; i < size; i++)
     {
         new_Map->entries[i] = NULL;
     }
@@ -138,11 +137,6 @@ void Poll(_HashMap *map, char *key)
     Dict *dict = SEARCH(map, key);
     void *res = NULL;
 
-    if (dict == NULL)
-    {
-        return res;
-    }
-
     if (dict->chain_length > 0)
     {
         LinkedList *value = dict->value;
@@ -160,7 +154,6 @@ void Poll(_HashMap *map, char *key)
             map->entries_used--;
         }
     }
-    return res;
 }
 
 int Clean(_HashMap *map, char *key)
@@ -212,5 +205,4 @@ void Destroy(_HashMap **map)
 
     free(real_map->entries);
     free(real_map);
-
 }

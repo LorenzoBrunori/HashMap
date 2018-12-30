@@ -2,6 +2,7 @@
 #define HASHMAP_H
 
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct LinkedList
 {
