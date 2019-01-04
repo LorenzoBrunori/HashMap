@@ -104,6 +104,8 @@ TEST(ADDMULTIPLEKEYS)
     ASSERT_THAT(new_Map->entries_used == 3);
     Destroy(&new_Map);
     free(key);
+    free(key2);
+    free(key3);
 }
 
 
