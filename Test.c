@@ -53,6 +53,61 @@ TEST(ADDLONGVALUE)
     free(key);
 }
 
+TEST(ADDCHARVALUE)
+{
+    _HashMap *new_Map = InitHashMap(SIZE);
+    char *key = _strdup("AIV");
+    char *value = "WORLD";
+
+    Add_Value(new_Map, key, (void *)&value);
+    ASSERT_THAT(new_Map->entries_used == 1);
+    Destroy(&new_Map);
+    free(key);
+}
+
+TEST(ADDMULTIPLEVALUES)
+{
+    _HashMap *new_Map = InitHashMap(SIZE);
+    char *key = _strdup("AIV");
+    char *value = "WORLD";
+    int value2 = 10;
+    float value3 = 3.3f;
+    long value4 = 65748329;
+
+    Add_Value(new_Map, key, (void *)&value);
+    Add_Value(new_Map, key, (void *)&value2);
+    Add_Value(new_Map, key, (void *)&value3);
+    Add_Value(new_Map, key, (void *)&value4);
+
+    ASSERT_THAT(new_Map->entries_used == 1);
+    Destroy(&new_Map);
+    free(key);
+}
+
+TEST(ADDMULTIPLEKEYS)
+{
+    _HashMap *new_Map = InitHashMap(SIZE);
+    char *key  = _strdup("AIV");
+    char *key2 = _strdup("HELLO");
+    char *key3 = _strdup("MAP");
+
+    char *value = "WORLD";
+    int value2 = 10;
+    float value3 = 3.3f;
+    long value4 = 65748329;
+
+    Add_Value(new_Map, key, (void *)&value);
+    Add_Value(new_Map, key2, (void *)&value2);
+    Add_Value(new_Map, key3, (void *)&value3);
+    Add_Value(new_Map, key, (void *)&value4);
+
+    ASSERT_THAT(new_Map->entries_used == 3);
+    Destroy(&new_Map);
+    free(key);
+}
+
+
+
 TEST(MAPADDCOLLISION)
 {
     _HashMap *new_Map = InitHashMap(SIZE);
@@ -142,6 +197,9 @@ int main(int argc, char **argv)
     RUN_TEST(INITHASH);
     RUN_TEST(MAPADD);
     RUN_TEST(ADDLONGVALUE);
+    RUN_TEST(ADDCHARVALUE);
+    RUN_TEST(ADDMULTIPLEVALUES);
+    RUN_TEST(ADDMULTIPLEKEYS);
     RUN_TEST(MAPADDCOLLISION);
     RUN_TEST(GET);
     RUN_TEST(POLL);
