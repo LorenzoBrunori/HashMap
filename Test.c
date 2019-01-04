@@ -120,10 +120,11 @@ TEST(CLEAN)
     char *key = _strdup("AIV");
     int value = 40;
 
+    char *key2 = _strdup("AIV");
     int value2 = 37;
 
     Add_Value(new_Map, key, (void *)&value);
-    Add_Value(new_Map, key, (void *)&value2);
+    Add_Value(new_Map, key2, (void *)&value2);
     ASSERT_THAT(new_Map->entries_used == 1);
 
     Clean(new_Map, key);
